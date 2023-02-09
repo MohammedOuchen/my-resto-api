@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->integer('postal_code')->nullable();
             $table->string('country')->nullable();
+            $table->enum('role', [\App\Models\User::CUSTOMER, \App\Models\User::MANAGER]);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

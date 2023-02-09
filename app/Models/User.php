@@ -42,6 +42,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // var
+    const CUSTOMER = 'customer';
+    const MANAGER = 'manager';
+
     public function orders() {
         return $this->hasMany(order::class);
     }
