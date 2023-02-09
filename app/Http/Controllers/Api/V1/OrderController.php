@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -14,7 +17,12 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::user()->role == User::CUSTOMER){
+          $order = Order::where('id_user', Auth::id())->get();
+          return $order;
+        }
+        $order = Order::all();
+        return $order;
     }
 
     /**

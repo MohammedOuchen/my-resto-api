@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->enum('stat', ['in_progress', 'validated', 'pass']);
+            $table->enum('state', ['in_progress', 'validated', 'pass']);
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();
