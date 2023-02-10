@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,16 +28,6 @@ class OrderController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -43,7 +35,22 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $elements = $request->all();
+        $order = new Order();
+        $order->date = "date";
+        $order->date = Carbon::now();
+        $order->id_user = Auth::id() ;
+        $order->save();
+
+        foreach($elements as $element){
+            // return $element['id'];
+           $product = Product::find($element['id']);
+        //    return $product;
+            return $order->products();
+            $order->products()->attach($product->id);
+        }
+
+        return response()->json(['order' => $order]);;
     }
 
     /**
